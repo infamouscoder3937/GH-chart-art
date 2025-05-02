@@ -2,83 +2,54 @@
 
 A Python CLI tool to automate Git commits and turn your GitHub contribution graph into a work of art.
 
-```
-  ██████╗ ██╗  ██╗  █████╗  ██████╗ ████████╗
- ██╔════╝ ██║  ██║ ██╔══██╗ ██╔══██╗╚══██╔══╝
- ██║  ███╗███████║ ███████║ ██████╔╝   ██║
- ██║   ██║██╔══██║ ██╔══██║ ██╔══██╗   ██║
- ╚██████╔╝██║  ██║ ██║  ██║ ██████╔╝   ██║
-  ╚═════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝
-```
+<pre>
+      ▄██████▄     ▄██████▄   ▄█       ▄████████    ▄████████
+     ███    ███   ███    ███ ███      ███    ███   ███    ███
+     ███    ███   ███    ███ ███      ███    █▀    ███    █▀
+    ▄███    ███  ▄███    ███ ███     ▄███▄▄▄      ▄███▄▄▄
+    ▀▀███████▀  ▀▀███████▀  ███    ▀▀███▀▀▀     ▀▀███▀▀▀
+     ███    ███   ███    ███ ███      ███    █▄    ███    █▄
+     ███    ███   ███    ███ ███      ███    ███   ███    ███
+    ███    █▀    ███    █▀  ██████████████████   ██████████
+</pre>
 
 ---
 
 ## Features
 
-- **Text to Art:** Convert any text into a pattern on your contribution graph.
-- **Fill Chart:** Completely fill your contribution graph for a given year.
-- **Randomize Commits:** Make commits on random days throughout a chosen year.
-- **Commit Density:** Control the "shade" of green on your graph with a `--level` setting (1-5).
-- **Dry Run Mode:** Preview your art without making a single commit using `--dry-run`.
-- **Safety First:** The tool checks if Git is installed and warns you before adding to a repository with an existing history.
-- **User-Friendly:** Colorful and clear output makes the tool easy and fun to use.
+- **Menu-Driven:** An easy-to-use main menu to guide you through the options.
+- **Multiple Art Modes:**
+  - **Text Art:** Convert any text into a pattern on your contribution graph.
+  - **Fill Graph:** Fill every day of a year with commits.
+  - **Randomize Graph:** Commit on random days throughout a year.
+- **Flexible Commit Density:** Specify a **minimum and maximum** number of commits per day for ultimate control over your graph's appearance.
+- **Fun Animations:** Watch a fun ASCII animation while the script generates your commits.
+- **Safety First:** The tool checks if Git is installed and initializes a new repository for you if needed.
 
-## Requirements
+## How to Use
 
-- Python 3.x
-- Git
+Using ghART is simple. No command-line arguments are needed to get started.
 
-## Setup
+1.  **Run the script:**
+    ```bash
+    python draw.py
+    ```
+2.  **Choose an option** from the main menu.
+3.  **Follow the prompts** for the year and commit density.
 
-1.  Clone the repository or download the `draw.py` script.
-2.  Open a terminal in the project directory.
-3.  For best results, start in a new, empty folder and the script will initialize the repository for you.
+## Menu Options Explained
 
-## Usage
+### 1. Create Text Art
+This mode lets you draw a word or phrase on your graph.
+- **Commit Count:** You will be asked for a **fixed** number of commits to create for each "pixel" of the art to ensure it looks clean and uniform.
 
-The script `draw.py` is the main entry point. All arguments are optional.
+### 2. Fill The Graph
+This mode will create commits for **every day** of the chosen year.
+- **Commit Range:** You will be asked for a **minimum and maximum** number of commits. For each day, a random number of commits within this range will be created, producing a natural, varied look.
 
-### Command-Line Arguments
-
-| Argument      | Description                                                 | Default        | Example                               |
-|---------------|-------------------------------------------------------------|----------------|---------------------------------------|
-| `--text`      | The text to draw on the chart.                              | `None`         | `--text "ART"`                          |
-| `--year`      | The target year for the commits.                            | Current Year   | `--year 2023`                         |
-| `--level`     | The commit density (1-5). Higher is a darker green.         | `1`            | `--level 5`                           |
-| `--message`   | A custom commit message to use for all commits.             | `ghART commit` | `--message "My project setup"`        |
-| `--dry-run`   | Preview the commits without actually running them.          | `False`        | `--dry-run`                           |
-
-### 1. Draw Text on the Chart
-
-Create art with specific text. Use `--level` to make it stand out.
-
-```bash
-python draw.py --text "HELLO" --year 2024 --level 3
-```
-
-### 2. Fill the Contribution Chart
-
-Run the script without `--text` and choose the "Fill" option. This will commit on every day of the year.
-
-```bash
-python draw.py --year 2023 --level 5
-```
-
-### 3. Randomize Commits
-
-Run without `--text` and choose the "Randomize" option for a more natural, sporadic pattern.
-
-```bash
-python draw.py --year 2022 --level 2
-```
-
-### 4. Preview with Dry Run
-
-Before you commit, see what your art will look like. The `--dry-run` flag works with all modes.
-
-```bash
-python draw.py --text "PREVIEW" --year 2025 --dry-run
-```
+### 3. Randomize The Graph
+This mode will create commits on **random days** of the chosen year.
+- **Commit Range:** Like the Fill option, the number of commits on each random day will be a random number within your specified min/max range.
 
 ## Pushing to GitHub
 
@@ -112,7 +83,7 @@ Go to your GitHub email settings: [https://github.com/settings/emails](https://g
 git config --global user.email "your-github-email@example.com"
 ```
 
-After updating your email, you must **delete the local repository (including the hidden `.git` folder), re-initialize it, and re-run the script**.
+After updating your email, you must **delete the local repository (including the hidden `.git` folder) and start over**.
 
 ---
 

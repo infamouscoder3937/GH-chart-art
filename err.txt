@@ -1,0 +1,4 @@
+File "P:\Playground\Projects\foo\draw.py", line 79
+    """,
+    ^
+SyntaxError: unterminated triple-quoted string literal (detected at line 265)
