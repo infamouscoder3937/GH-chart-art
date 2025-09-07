@@ -15,42 +15,45 @@ class style:
     GREEN = '\033[92m'
     YELLOW = '\033[93m'
     CYAN = '\033[96m'
-    # ANSI escape codes for cursor control
-    CURSOR_UP_ONE = '\033[1A'
-    CLEAR_LINE = '\033[K'
-    CURSOR_HOME = '\033[H'
     HIDE_CURSOR = '\033[?25l'
     SHOW_CURSOR = '\033[?25h'
 
-BANNER = style.GREEN + style.BOLD + r'''
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢃⣿⡏⣿⡿⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⡍⣉⠽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢡⣾⣿⣷⠲⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣷⢻⣷⣮⣝⡻⢿⣿⣿⣿⣿⣿⢣⣿⣿⣿⣿⡄⠀⠀⢸⣿⣿⣿⣿⣿⣿⠿⠛⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣟⡊⣿⣿⣿⣿⣷⣬⣛⠛⣻⢃⣿⣿⣿⣿⣿⣧⠀⠀⠀⣛⣻⣿⠟⣋⣵⡞⠀⣿⣟⣛⠛⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⡘⣿⣿⣿⣿⣿⣿⣷⣍⣼⣿⣿⣿⣿⣿⣿⡄⠀⢀⣨⣭⣶⣿⣿⣿⠁⠰⠟⠋⠁⢰⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣷⡹⣿⣿⣿⣿⣿⣿⡿⢟⣛⣫⣭⣽⣛⣻⠷⣾⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡹⣿⣿⣿⢛⣵⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣭⡻⣿⣿⣿⣿⠃⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿
-                        ⣫⢿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣿⡿⣱⣿⣿⣿⣿⠿⣛⡭⢟⣩⣽⣿⠿⠿⠿⣎⢿⣿⣿⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣷⣮⠛⢿⣿⣿⣿⣿⣿⣿⣿⢱⣿⣿⣟⣻⣴⣭⡷⢟⣻⣭⠷⣞⣛⣯⣥⣾⣦⢻⣿⣦⣤⣤⣄⡀⢉⣬⡉⠙⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣦⡝⢿⣿⣿⣿⣿⡏⡾⢛⣯⣭⣭⡵⠶⢟⣫⣥⣶⢿⣿⣿⣿⣷⣭⡻⣏⢿⣿⣿⣿⠟⣡⡿⠋⠐⠺⠿⠿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣬⣛⢿⣿⣿⡇⣷⡶⣾⣶⣶⣿⣶⣝⢿⣿⢧⣿⡿⠿⠟⢛⣿⣧⡸⡜⣿⣿⠋⠒⠉⠀⠀⠀⠀⠀⢀⣠⣾
-                        ⣿⣿⣿⣿⣿⣿⣿⠿⣃⣼⣿⡇⠟⣼⣿⣿⣿⠿⢟⣛⣃⢿⡄⣶⣾⣿⣶⣿⣿⣿⢃⣇⢿⣿⣷⣄⡀⠀⠀⠀⣠⣶⣿⣿⣿
-                        ⣿⣿⡟⠟⣛⣭⣵⣾⣿⣿⣿⣷⢰⢙⣭⣷⣦⣼⣿⣿⡟⣸⣷⣝⠿⣿⣿⣿⠿⣫⣾⣿⠸⣿⣿⣿⡿⢂⣤⠀⠙⠿⢿⣿⣿
-                        ⣿⣿⣿⣷⣮⣝⡻⢿⣿⣿⣿⣿⡸⣧⡹⢿⣿⣿⡿⢟⣵⢻⣿⡏⣿⣶⣶⣶⠟⠋⣰⣿⠄⣭⡻⡏⠰⠛⠁⠀⠀⠀⠙⠻⣿
-                        ⣿⣿⣿⣿⣿⣿⣦⡄⠈⠙⢿⣿⡇⢿⣿⢷⣶⣶⡾⢟⣽⡇⣿⣿⢸⣦⣤⣤⣴⣾⣿⣿⠀⢸⡿⢠⠀⠀⠀⠀⠀⠀⣠⣴⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⣸⣿⢋⣸⣿⣷⣶⣶⣿⣿⣿⣿⡜⠟⣸⣿⣿⣿⣿⣿⣿⣿⠀⠀⢠⣿⡄⣄⠀⢠⣶⣶⣶⣾⣿
-                        ⣿⣿⣿⣿⣿⣿⡿⢟⣩⣾⣿⡇⣿⣧⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⠿⣯⡉⠀⡈⠐⠒⠛⠉⠀⠀⠙⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣭⣤⣭⣭⣛⣛⡍⣮⣙⡘⣿⣿⣿⣿⡿⢛⡩⣽⣶⣶⢇⣾⣿⣿⣿⡿⠁⠁⣷⠀⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣁⠀⣿⣿⣷⡹⣇⠻⣵⣾⣿⣿⢶⡹⣿⢹⠿⣿⣿⣿⠏⡀⠈⠉⠁⠀⠀⠰⣶⣶⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣃⣟⣋⡡⠀⡙⣿⣿⣿⣿⣿⣤⣿⣶⣾⣤⣼⡿⠋⠀⠁⠀⠀⠀⠀⢀⣀⣹⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠉⢈⡻⢿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣿⣿⣿⠀⣈⢩⣝⣛⣫⣭⣄⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⡶⢖⡂⡄⣨⣛⡿⠿⠿⢟⡀⠀⠀⣀⠰⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿
-                        ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣋⣵⣾⡟⣵⠇⣿⣿⣿⣿⣿⣿⣿⡄⣷⡩⣽⡶⣭⡛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿
-''' + style.RESET
+BANNER = style.GREEN + style.BOLD + r"""
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢃⣿⡏⣿⡿⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⡍⣉⠽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢡⣾⣿⣷⠲⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣷⢻⣷⣮⣝⡻⢿⣿⣿⣿⣿⣿⢣⣿⣿⣿⣿⡄⠀⠀⢸⣿⣿⣿⣿⣿⣿⠿⠛⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣟⡊⣿⣿⣿⣿⣷⣬⣛⠛⣻⢃⣿⣿⣿⣿⣿⣧⠀⠀⠀⣛⣻⣿⠟⣋⣵⡞⠀⣿⣟⣛⠛⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⡘⣿⣿⣿⣿⣿⣿⣷⣍⣼⣿⣿⣿⣿⣿⣿⡄⠀⢀⣨⣭⣶⣿⣿⣿⠁⠰⠟⠋⠁⢰⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣷⡹⣿⣿⣿⣿⣿⣿⡿⢟⣛⣫⣭⣽⣛⣻⠷⣾⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡹⣿⣿⣿⢛⣵⣾⣿⣿⣿⣿⣿⣿⣿⣿⣶⣭⡻⣿⣿⣿⣿⠃⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿
+                            ⣫⢿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣿⡿⣱⣿⣿⣿⣿⠿⣛⡭⢟⣩⣽⣿⠿⠿⠿⣎⢿⣿⣿⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣷⣮⠛⢿⣿⣿⣿⣿⣿⣿⣿⢱⣿⣿⣟⣻⣴⣭⡷⢟⣻⣭⠷⣞⣛⣯⣥⣾⣦⢻⣿⣦⣤⣤⣄⡀⢉⣬⡉⠙⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣦⡝⢿⣿⣿⣿⣿⡏⡾⢛⣯⣭⣭⡵⠶⢟⣫⣥⣶⢿⣿⣿⣿⣷⣭⡻⣏⢿⣿⣿⣿⠟⣡⡿⠋⠐⠺⠿⠿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣬⣛⢿⣿⣿⡇⣷⡶⣾⣶⣶⣿⣶⣝⢿⣿⢧⣿⡿⠿⠟⢛⣿⣧⡸⡜⣿⣿⠋⠒⠉⠀⠀⠀⠀⠀⢀⣠⣾
+                            ⣿⣿⣿⣿⣿⣿⣿⠿⣃⣼⣿⡇⠟⣼⣿⣿⣿⠿⢟⣛⣃⢿⡄⣶⣾⣿⣶⣿⣿⣿⢃⣇⢿⣿⣷⣄⡀⠀⠀⠀⣠⣶⣿⣿⣿
+                            ⣿⣿⡟⠟⣛⣭⣵⣾⣿⣿⣿⣷⢰⢙⣭⣷⣦⣼⣿⣿⡟⣸⣷⣝⠿⣿⣿⣿⠿⣫⣾⣿⠸⣿⣿⣿⡿⢂⣤⠀⠙⠿⢿⣿⣿
+                            ⣿⣿⣿⣷⣮⣝⡻⢿⣿⣿⣿⣿⡸⣧⡹⢿⣿⣿⡿⢟⣵⢻⣿⡏⣿⣶⣶⣶⠟⠋⣰⣿⠄⣭⡻⡏⠰⠛⠁⠀⠀⠀⠙⠻⣿
+                            ⣿⣿⣿⣿⣿⣿⣦⡄⠈⠙⢿⣿⡇⢿⣿⢷⣶⣶⡾⢟⣽⡇⣿⣿⢸⣦⣤⣤⣴⣾⣿⣿⠀⢸⡿⢠⠀⠀⠀⠀⠀⠀⣠⣴⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⣸⣿⢋⣸⣿⣷⣶⣶⣿⣿⣿⣿⡜⠟⣸⣿⣿⣿⣿⣿⣿⣿⠀⠀⢠⣿⡄⣄⠀⢠⣶⣶⣶⣾⣿
+                            ⣿⣿⣿⣿⣿⣿⡿⢟⣩⣾⣿⡇⣿⣧⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⠿⣯⡉⠀⡈⠐⠒⠛⠉⠀⠀⠙⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣭⣤⣭⣭⣛⣛⡍⣮⣙⡘⣿⣿⣿⣿⡿⢛⡩⣽⣶⣶⢇⣾⣿⣿⣿⡿⠁⠁⣷⠀⠀⠀⠀⠀⠀⠀⠈⢻⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⣁⠀⣿⣿⣷⡹⣇⠻⣵⣾⣿⣿⢶⡹⣿⢹⠿⣿⣿⣿⠏⡀⠈⠉⠁⠀⠀⠰⣶⣶⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣃⣟⣋⡡⠀⡙⣿⣿⣿⣿⣿⣤⣿⣶⣾⣤⣼⡿⠋⠀⠁⠀⠀⠀⠀⢀⣀⣹⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠉⢈⡻⢿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣿⣿⣿⠀⣈⢩⣝⣛⣫⣭⣄⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⡶⢖⡂⡄⣨⣛⡿⠿⠿⢟⡀⠀⠀⣀⠰⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿
+                            ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣋⣵⣾⡟⣵⠇⣿⣿⣿⣿⣿⣿⣿⡄⣷⡩⣽⡶⣭⡛⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+""" + style.RESET
 
-CREDITS = style.CYAN + "Just make sure this you're running this on a dummy repo. " + style.RESET
+CREDITS = style.CYAN + "                                                *[BURPS]* " + style.RESET
+
+DISCLAIMER = f"""
+{style.YELLOW}{style.BOLD}Disclaimer:{style.RESET}{style.YELLOW}
+This tool modifies your Git history. It's strongly recommended to use it on a new, dedicated repository.
+The creator is not responsible for any unintended consequences.
+If you dislike the result, you will need to manually delete the repository.{style.RESET}
+"""
 
 # ==========================
 # ASCII Art & Animations
@@ -85,20 +88,24 @@ FONT = {
 
 ANIMATIONS = [
     [ # Dancing Girl
-        r"( o_o)/",
-        r"\(o_o )",
-        r"(o_o )/",
-        r"\( o_o)",
+        r"""
+( o_o)/""",
+        r"""
+\(o_o )""",
+        r"""
+(o_o )/""",
+        r"""
+\( o_o)""",
     ],
-    [ # Kirby Dance
+    [
         r"(>'-')>",
         r"<('-'<)",
         r"^('-')^",
         r"v('-')v",
     ],
-    [ # Bongo Cat
+    [
         r"\n /\_/\  \n( o.o ) \n > ^ <  \n",
-        r"\n /\_/\  \n( o.o ) \n> ^ <   \n( ( ) )  \n`\"\"\"\"\`  \n",
+        r"\n /\_/\  \n( o.o ) \n> ^ <   \n( ( ) )  \n`\"\"\"\"`  \n",
     ]
 ]
 
@@ -203,29 +210,21 @@ def run_ghart(mode, params):
     print(style.HIDE_CURSOR, end="")
     try:
         for i, date in enumerate(sorted(commit_dates)):
+            # Animation display - simplified to clear screen
+            os.system('cls' if os.name == 'nt' else 'clear')
             frame = animation[i % len(animation)]
+            print(f"{style.GREEN}{frame}{style.RESET}")
+            print(f"{style.BOLD}Processing day {i+1}/{total_days}...{style.RESET}")
+
             commits_today = random.randint(min_c, max_c)
             for _ in range(commits_today):
                 make_commit(date, params['message'])
-            
-            # Animation display
-            if i > 0: # Don't clear for the first frame
-                num_lines = frame.count('\n') + 2
-                print(f'\033[{num_lines}A', end="")
-            
-            print(f"{style.GREEN}{frame}{style.RESET}")
-            print(f"{style.BOLD}Processing day {i+1}/{total_days}...{style.CLEAR_LINE}{style.RESET}")
             time.sleep(0.05)
 
     finally:
         print(style.SHOW_CURSOR, end="")
 
-    # Final cleanup of the animation space
-    final_frame = animation[-1]
-    num_lines = final_frame.count('\n') + 2
-    for _ in range(num_lines):
-        print(style.CURSOR_UP_ONE + style.CLEAR_LINE, end="")
-
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(f"\n{style.BOLD}{style.GREEN}✅ Done! All commits have been created locally.{style.RESET}")
     time.sleep(1)
     print(f"\n{style.YELLOW}Please note:{style.RESET} It may take a few minutes for your contributions to appear on your GitHub graph.")
@@ -243,8 +242,7 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
         print(BANNER)
         print(CREDITS)
-        print(f"{style.CYAN}Forked From            : {style.RED}https://github.com/midhun777 {style.RESET} {style.RESET}")
-        print(f"{style.CYAN}Follow me on instagram : {style.RED}@prajwalp.__ {style.RESET} {style.RESET}")
+        print(DISCLAIMER)
         print(f"\n{style.BOLD}--- Main Menu ---{style.RESET}")
         print("1. Create Text Art")
         print("2. Fill The Graph")

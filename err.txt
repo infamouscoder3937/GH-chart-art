@@ -1,4 +1,14 @@
-File "P:\Playground\Projects\foo\draw.py", line 79
-    """,
-    ^
-SyntaxError: unterminated triple-quoted string literal (detected at line 265)
+Enter the text to draw: Hire Me !
+
+Generating commits for 2021. This may take a moment...
+Traceback (most recent call last):
+  File "P:\Playground\Projects\foo\draw.py", line 280, in <module>
+    main()
+    ~~~~^^
+  File "P:\Playground\Projects\foo\draw.py", line 259, in main
+    run_ghart('text', params)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "P:\Playground\Projects\foo\draw.py", line 208, in run_ghart
+    print(style.HIDE_CURSOR, end="")
+          ^^^^^^^^^^^^^^^^^
+AttributeError: type object 'style' has no attribute 'HIDE_CURSOR'
