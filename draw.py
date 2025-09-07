@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 # ==========================
 # CONFIG
 # ==========================
-TEXT = "MIDHUN777"
+TEXT = "FOO"
 YEAR = 2012
 COMMITS_PER_PIXEL = 1  # Increase this for darker pixels
 
@@ -98,4 +98,4 @@ if __name__ == "__main__":
         subprocess.run(["git", "init"])
 
     draw_message(TEXT, YEAR)
-    print(f"✅ Done! Now run:\n\n  git remote add origin https://github.com/Midhun777/Midhun777-chart-art\n  git branch -M main\n  git push -u origin main")
+    print(f"✅ Done! Now run:\n\n  git remote add origin https://github.com/xxxxxxx\n  git branch -M main\n  git push -u origin main")
