@@ -1,14 +1,14 @@
-# GitHub Chart Art
+# ghART
 
-A Python CLI tool to automate Git commits to create art on your GitHub contribution graph.
+A Python CLI tool to automate Git commits and turn your GitHub contribution graph into a work of art.
 
 ```
-██████╗ ██╗  ██╗ █████╗ ██████╗ ████████╗     █████╗ ██████╗ ████████╗
-██╔══██╗██║  ██║██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██╔══██╗╚══██╔══╝
-██████╔╝███████║███████║██████╔╝   ██║       ███████║██████╔╝   ██║   
-██╔═══╝ ██╔══██║██╔══██║██╔══██╗   ██║       ██╔══██║██╔══██╗   ██║   
-██║     ██║  ██║██║  ██║██║  ██║   ██║       ██║  ██║██████╔╝   ██║   
-╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝╚═════╝    ╚═╝   
+  ██████╗ ██╗  ██╗  █████╗  ██████╗ ████████╗
+ ██╔════╝ ██║  ██║ ██╔══██╗ ██╔══██╗╚══██╔══╝
+ ██║  ███╗███████║ ███████║ ██████╔╝   ██║
+ ██║   ██║██╔══██║ ██╔══██║ ██╔══██╗   ██║
+ ╚██████╔╝██║  ██║ ██║  ██║ ██████╔╝   ██║
+  ╚═════╝ ╚═╝  ╚═╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝
 ```
 
 ---
@@ -16,9 +16,12 @@ A Python CLI tool to automate Git commits to create art on your GitHub contribut
 ## Features
 
 - **Text to Art:** Convert any text into a pattern on your contribution graph.
-- **Fill Chart:** Completely fill your contribution graph for a given year with commits.
+- **Fill Chart:** Completely fill your contribution graph for a given year.
 - **Randomize Commits:** Make commits on random days throughout a chosen year.
-- **Customizable:** Choose the year, the text, and the commit message.
+- **Commit Density:** Control the "shade" of green on your graph with a `--level` setting (1-5).
+- **Dry Run Mode:** Preview your art without making a single commit using `--dry-run`.
+- **Safety First:** The tool checks if Git is installed and warns you before adding to a repository with an existing history.
+- **User-Friendly:** Colorful and clear output makes the tool easy and fun to use.
 
 ## Requirements
 
@@ -27,76 +30,74 @@ A Python CLI tool to automate Git commits to create art on your GitHub contribut
 
 ## Setup
 
-1.  **Clone the repository or download the files.**
-2.  **Open a terminal** in the project directory.
-3.  **Initialize a new Git repository** in the directory where you want to create the commits. This can be a new, empty repository that you will link to GitHub.
-
-    ```bash
-    git init
-    ```
+1.  Clone the repository or download the `draw.py` script.
+2.  Open a terminal in the project directory.
+3.  For best results, start in a new, empty folder and the script will initialize the repository for you.
 
 ## Usage
 
-The script `draw.py` is the main entry point for all operations.
+The script `draw.py` is the main entry point. All arguments are optional.
+
+### Command-Line Arguments
+
+| Argument      | Description                                                 | Default        | Example                               |
+|---------------|-------------------------------------------------------------|----------------|---------------------------------------|
+| `--text`      | The text to draw on the chart.                              | `None`         | `--text "ART"`                          |
+| `--year`      | The target year for the commits.                            | Current Year   | `--year 2023`                         |
+| `--level`     | The commit density (1-5). Higher is a darker green.         | `1`            | `--level 5`                           |
+| `--message`   | A custom commit message to use for all commits.             | `ghART commit` | `--message "My project setup"`        |
+| `--dry-run`   | Preview the commits without actually running them.          | `False`        | `--dry-run`                           |
 
 ### 1. Draw Text on the Chart
 
-Use the `--text` argument to specify the string you want to draw. You can also specify the `--year` and a custom `--message` for the commits.
+Create art with specific text. Use `--level` to make it stand out.
 
 ```bash
-python draw.py --text "HELLO WORLD" --year 2024 --message "Custom commit message"
+python draw.py --text "HELLO" --year 2024 --level 3
 ```
-
-- `--text`: The text to display on the contribution graph.
-- `--year`: (Optional) The year to create the art in. Defaults to the current year.
-- `--message`: (Optional) The commit message to use for all commits.
 
 ### 2. Fill the Contribution Chart
 
-To make a commit for every day of a specific year, run the script without the `--text` argument and choose the "Fill" option.
+Run the script without `--text` and choose the "Fill" option. This will commit on every day of the year.
 
 ```bash
-python draw.py --year 2023
-```
-
-This will prompt you:
-```
-No text provided. Would you like to (F)ill the chart completely or (R)andomize commits? [F/R]: F
+python draw.py --year 2023 --level 5
 ```
 
 ### 3. Randomize Commits
 
-To make commits on random days of a specific year, run the script without the `--text` argument and choose the "Randomize" option.
+Run without `--text` and choose the "Randomize" option for a more natural, sporadic pattern.
 
 ```bash
-python draw.py --year 2022
+python draw.py --year 2022 --level 2
 ```
 
-This will prompt you:
-```
-No text provided. Would you like to (F)ill the chart completely or (R)andomize commits? [F/R]: R
+### 4. Preview with Dry Run
+
+Before you commit, see what your art will look like. The `--dry-run` flag works with all modes.
+
+```bash
+python draw.py --text "PREVIEW" --year 2025 --dry-run
 ```
 
 ## Pushing to GitHub
 
-This script **only creates the commits locally**. It does not push them to a remote repository. You must do this manually.
+This script **only creates the commits locally**. You must push them to GitHub yourself.
 
 ```bash
-# Link your local repository to a remote GitHub repository
-# Replace with your GitHub repository URL
+# 1. Link your local repository to a remote GitHub repository
+# (Replace with your GitHub repository URL)
 git remote add origin https://github.com/your-username/your-repo.git
 
-# Push the commits
+# 2. Push the commits (a force push is often required)
 git push -u origin main --force
 ```
 
-**Note:** You may need to use `--force` because you are rewriting the history of the repository.
-
 ## ❗ Important: Troubleshooting
 
-### Why can't I see my contributions on the graph?
+### "Why can't I see my contributions on the graph?"
 
-This is the most common problem. For your commits to appear on your GitHub contribution graph, the email address used for the commits **must** be associated with your GitHub account.
+This is the most common problem. For your commits to appear, the email in your local Git config **must** be one of the emails associated with your GitHub account.
 
 **1. Check your local Git email:**
 ```bash
@@ -111,12 +112,8 @@ Go to your GitHub email settings: [https://github.com/settings/emails](https://g
 git config --global user.email "your-github-email@example.com"
 ```
 
-After updating your email, you must **delete the local repository (including the hidden `.git` folder), re-initialize it, and re-run the script** to generate the commits with the correct email address.
-
-### Commits with Future Dates
-
-If you create commits for a future year (e.g., 2026), they will **not** appear on your contribution graph until that date actually arrives. This is the expected behavior of GitHub.
+After updating your email, you must **delete the local repository (including the hidden `.git` folder), re-initialize it, and re-run the script**.
 
 ---
 
-*A vibe coded project* 
+*A vibe code project*
